@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Katalog produk Fantasy Store — Pulsa, data, token listrik, e-wallet semua operator."/>
+  <title>Produk — Fantasy Store</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">✦</div> Fantasy Store
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="produk.html" class="active">Produk</a></li>
+      <li><a href="cek-status.html">Cek Status</a></li>
+      <li><a href="kontak.html">Kontak</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://wa.me/085783385872" target="_blank" class="nav-wa">
+        <i class="fab fa-whatsapp"></i> WhatsApp CS
+      </a>
+      <a href="produk.html" class="btn-cta">Beli Sekarang</a>
+    </div>
+    <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label" style="justify-content:center">Katalog Lengkap</div>
+    <h1>Semua <span class="grad-text">Produk PPOB</span></h1>
+    <p class="text-muted" style="font-size:.95rem; margin-top:8px">Pilih kategori dan operator favoritmu</p>
+  </div>
+</div>
+
+<!-- FILTER STICKY -->
+<div class="filter-sticky">
+  <div class="filter-inner">
+    <div class="filter-group">
+      <label>Kategori</label>
+      <div class="chip-group" id="chipKat">
+        <button class="chip active" data-kat="semua">Semua</button>
+        <button class="chip" data-kat="pulsa">📱 Pulsa</button>
+        <button class="chip" data-kat="data">📶 Data</button>
+        <button class="chip" data-kat="listrik">⚡ Listrik</button>
+        <button class="chip" data-kat="ewallet">💰 E-Wallet</button>
+        <button class="chip" data-kat="telepon">📞 Telepon</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label>Operator</label>
+      <div class="chip-group" id="chipOp">
+        <button class="chip active" data-op="semua">Semua</button>
+        <button class="chip" data-op="telkomsel">Telkomsel</button>
+        <button class="chip" data-op="indosat">Indosat</button>
+        <button class="chip" data-op="xl">XL</button>
+        <button class="chip" data-op="tri">Tri</button>
+        <button class="chip" data-op="smartfren">Smartfren</button>
+        <button class="chip" data-op="axis">Axis</button>
+        <button class="chip" data-op="pln">PLN</button>
+        <button class="chip" data-op="gopay">GoPay</button>
+        <button class="chip" data-op="ovo">OVO</button>
+        <button class="chip" data-op="dana">DANA</button>
+      </div>
+    </div>
+    <div class="filter-group" style="flex:0">
+      <label>Cari</label>
+      <div class="search-wrap">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Cari produk..."/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUK LIST -->
+<section class="produk-section">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+      <div id="produkCount" style="font-size:.85rem; color:var(--text2);">Menampilkan semua produk</div>
+    </div>
+    <div class="produk-grid" id="produkList"></div>
+  </div>
+</section>
+
+<!-- ═══ MODAL BELI ═══ -->
+<div class="modal-overlay" id="modalBeli" style="display:none">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-title">Form Pembelian</div>
+    <div class="modal-sub">Isi data di bawah ini dengan benar</div>
+
+    <div class="modal-produk-info" id="modalProdukInfo"></div>
+
+    <form id="formBeli" autocomplete="off">
+      <div class="form-group">
+        <label>Nomor HP / ID Tujuan *</label>
+        <input type="tel" id="fNomor" placeholder="Contoh: 085123456789" required/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nama Pemesan</label>
+          <input type="text" id="fNama" placeholder="Nama lengkap"/>
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / Email</label>
+          <input type="text" id="fKontak" placeholder="Untuk konfirmasi"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Metode Pembayaran *</label>
+        <div class="payment-methods" id="paymentMethods"></div>
+        <div class="pay-info-box" id="payInfoBox"></div>
+      </div>
+
+      <div class="order-total" id="orderTotal"></div>
+
+      <button type="submit" class="btn-primary btn-full">
+        <i class="fas fa-check-circle"></i>&nbsp; Konfirmasi Pesanan
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ MODAL SUKSES ═══ -->
+<div class="modal-overlay" id="modalSukses" style="display:none">
+  <div class="modal">
+    <div class="modal-success">
+      <div class="success-anim">✓</div>
+      <h2 style="font-size:1.4rem; margin-bottom:8px;">Pesanan Diterima!</h2>
+      <p id="suksesMsg" class="text-muted" style="font-size:.88rem; margin-bottom:0;"></p>
+      <div class="order-id-badge" id="suksesOid"></div>
+      <p class="text-muted" style="font-size:.78rem; line-height:1.6;">
+        Simpan ID ini untuk melacak status pesanan.<br/>
+        Segera konfirmasi pembayaran ke CS WhatsApp kami.
+      </p>
+      <div class="modal-btns">
+        <a href="https://wa.me/085783385872" target="_blank" class="btn-ghost" style="font-size:.85rem; padding:10px 20px;">
+          <i class="fab fa-whatsapp"></i> Konfirmasi ke CS
+        </a>
+        <a href="cek-status.html" class="btn-ghost" style="font-size:.85rem; padding:10px 20px;">Cek Status</a>
+        <button class="btn-primary" id="btnTutupSukses" style="font-size:.85rem; padding:10px 20px;">Kembali</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><div class="logo-icon">✦</div> Fantasy Store</a>
+        <p>Platform PPOB terpercaya untuk semua kebutuhan digital Anda.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/085783385872" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Layanan</h4>
+        <ul>
+          <li><a href="produk.html?kat=pulsa">Pulsa</a></li>
+          <li><a href="produk.html?kat=data">Paket Data</a></li>
+          <li><a href="produk.html?kat=listrik">Token Listrik</a></li>
+          <li><a href="produk.html?kat=ewallet">E-Wallet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="cek-status.html">Cek Status</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Kontak</h4>
+        <p><i class="fab fa-whatsapp"></i> 085783385872</p>
+        <p><i class="fas fa-envelope"></i> aswdwi@gmail.com</p>
+        <p><i class="fas fa-clock"></i> 24 Jam / 7 Hari</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 Fantasy Store. All rights reserved.</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/produk.js"></script>
+</body>
+</html>
