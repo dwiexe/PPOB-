@@ -5,10 +5,10 @@
 const STORE = {
   name:    'Fantasy Store',
   tagline: 'PPOB Terpercaya #1',
-  wa:      '085783385872',
+  wa:      '6285783385872',
   email:   'aswdwi@gmail.com',
-  ig:      '@fantasystore.id',
-  tg:      '@fantasystore',
+  ig:      '@dwixyz.id',
+  tg:      '@fastboot404',
 };
 
 // Payment methods (nomor tersembunyi, tampil saat dipilih)
@@ -19,7 +19,7 @@ const PAYMENT_METHODS = [
     icon:  '💙',
     color: '#1A8CFF',
     num:   '087788486916',
-    atas:  'Fantasy Store',
+    atas:  'Dwi Stiawan',
   },
   {
     id:    'seabank',
@@ -27,7 +27,7 @@ const PAYMENT_METHODS = [
     icon:  '🌊',
     color: '#2ECC71',
     num:   '901976839823',
-    atas:  'Fantasy Store',
+    atas:  'Dwi Stiawan',
   },
 ];
 
